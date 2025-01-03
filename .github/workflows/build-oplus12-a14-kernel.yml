@@ -25,24 +25,24 @@ jobs:
 
     - name: Download kernel source
       run: |
-        git clone https://github.com/OnePlusOSS/android_kernel_modules_and_devicetree_oneplus_sm8650 -b oneplus/sm8650_u_14.0.0_oneplus12 kernel_workspace --depth=1
+        git clone https://github.com/OnePlusOSS/android_kernel_modules_and_devicetree_oneplus_sm8650 -b oneplus/sm8650_v_15.0.0_oneplus12 kernel_workspace --depth=1
         cd $GITHUB_WORKSPACE/kernel_workspace
         cd kernel_platform
-        git clone https://github.com/OnePlusOSS/android_kernel_oneplus_sm8650/ -b oneplus/sm8650_u_14.0.0_oneplus12 common --depth=1
+        git clone https://github.com/OnePlusOSS/android_kernel_oneplus_sm8650/ -b oneplus/sm8650_v_15.0.0_oneplus12 common --depth=1
 
     - name: Download Clang-aosp
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
         mkdir clang-aosp
-        wget https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/master-kernel-build-2022/clang-r450784e.tar.gz
-        tar -C clang-aosp/ -zxvf clang-r450784e.tar.gz
+        wget https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r530567.tar.gz
+        tar -C clang-aosp/ -zxvf clang-r530567.tar.gz
 
     - name: Build kernel
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
         KERNEL_DIR=./kernel_platform/common
         OUT_DIR=../../out
-        DEFCONFIG="gki_defconfig"
+        DEFCONFIG="pineapple_GKI.config"
         LTO=thin
         export PATH=$GITHUB_WORKSPACE/kernel_workspace/clang-aosp/bin:$PATH
         export CLANG_TRIPLE=aarch64-linux-gnu-
