@@ -35,7 +35,7 @@ jobs:
 
     - name: Download kernel
       run: |
-        cd builds/ROOT_DIR
+        cd builds/$ROOT_DIR
         mkdir oneplus12_v
         cd ./oneplus12_v
         repo init -u https://github.com/OnePlusOSS/kernel_manifest.git -b oneplus/sm8650 -m oneplus12_v.xml
