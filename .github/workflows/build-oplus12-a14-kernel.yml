@@ -79,7 +79,7 @@ jobs:
         cp ./out/dist/Image ../AnyKernel3/Image
         cd ../AnyKernel3
         ZIP_NAME="Anykernel3-OP-A15-android14-6.1-KernelSU-SUSFS-$(date +'%Y-%m-%d-%H-%M-%S').zip"
-echo "Creating zip file $ZIP_NAME..."
+        echo "Creating zip file $ZIP_NAME..."
         zip -r "../$ZIP_NAME" ./*
     - name: Upload Image
       uses: actions/upload-artifact@v4
