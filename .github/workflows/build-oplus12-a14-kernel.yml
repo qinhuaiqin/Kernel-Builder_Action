@@ -35,6 +35,7 @@ jobs:
 
     - name: Download kernel
       run: |
+        cd builds/ROOT_DIR
         mkdir oneplus12_v
         cd ./oneplus12_v
         repo init -u https://github.com/OnePlusOSS/kernel_manifest.git -b oneplus/sm8650 -m oneplus12_v.xml
@@ -44,7 +45,7 @@ jobs:
         
     - name: add ksu
       run: |
-       cd ./kernel_platform
+       cd builds/$ROOT_DIR/oneplus12_v/kernel_platform
        curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU/next/kernel/setup.sh" | bash -s next
        cd ./KernelSU-Next/kernel
        sed -i 's/ccflags-y += -DKSU_VERSION=16/ccflags-y += -DKSU_VERSION=12113/' ./Makefile
@@ -74,6 +75,7 @@ jobs:
         
     - name: Build kernel
       run: |
+        cd builds/$ROOT_DIR/oneplus12_v
         sed -i '2s/check_defconfig//' ./kernel_platform/common/build.config.gki
         ./kernel_platform/oplus/build/oplus_build_kernel.sh pineapple gki
         cp ./out/dist/Image ../AnyKernel3/Image
